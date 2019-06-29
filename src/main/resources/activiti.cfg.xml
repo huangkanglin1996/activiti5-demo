@@ -12,7 +12,6 @@
         <property name="jdbcUsername" value="act_demo"></property>
         <property name="jdbcPassword" value="ylkj"></property>
         <property name="databaseSchemaUpdate" value="true"></property>
-
         <!--
             解决表视图不存在使用的
             <property name="databaseSchema" value="ACTIVITI"></property>
