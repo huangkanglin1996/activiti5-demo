@@ -21,8 +21,9 @@ import java.util.Map;
 
 /**
  * 诉求流程管理服务类
+ * 完善原因：修改流程变量支持taskId
  */
-public class AppealFlowService3 {
+public class AppealFlowService4 {
     ProcessEngineConfiguration engineConfiguration =
             ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml");
     // 获取流程引擎
@@ -97,7 +98,7 @@ public class AppealFlowService3 {
         }
     }
 
-    // 4.1 处理任务- 跳转到next任务 --最新
+    // 4.1 处理任务- 跳转到next任务 --修
     @Test
     public void completeTaskNext() {
         // 任务ID
@@ -110,6 +111,7 @@ public class AppealFlowService3 {
         Map<String, Object> variables = new HashMap<String, Object>();
         // 其中message对应sequenceFlow.bpmn中的${step=='next'}，next 对应流程变量的值
         variables.put("step", "next");
+
 
 
         // 3.完成任务，流程引擎通过流程变量里面的step=='next'自动跳转到下一步
