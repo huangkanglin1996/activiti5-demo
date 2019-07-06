@@ -102,7 +102,7 @@ public class AppealFlowService4 {
     @Test
     public void completeTaskNext() {
         // 任务ID
-        String taskId = "55002";
+        String taskId = "70003";
         TaskService taskService = processEngine.getTaskService();
         // 1.认领当前任务
         taskService.claim(taskId,"0030");
@@ -111,10 +111,12 @@ public class AppealFlowService4 {
         Map<String, Object> variables = new HashMap<String, Object>();
         // 其中message对应sequenceFlow.bpmn中的${step=='next'}，next 对应流程变量的值
         variables.put("step", "next");
+        variables.put("这是测是","111111111111111111111111");
 
+        // 3.设置任务变量
+        taskService.setVariableLocal(taskId,"test","任务节点变量");
 
-
-        // 3.完成任务，流程引擎通过流程变量里面的step=='next'自动跳转到下一步
+        // 4.完成任务，流程引擎通过流程变量里面的step=='next'自动跳转到下一步
         taskService.complete(taskId, variables);
 
         System.out.println("完成next任务：任务ID：" + taskId);
@@ -251,5 +253,32 @@ public class AppealFlowService4 {
             System.out.println("结束时间："+hti.getEndTime());
             System.out.println("===========================");
         }
+    }
+
+    /**
+     * 根据testId获取变量
+     */
+    @Test
+    public void queryVariableByTask(){
+        String taskId = "70003";  //项目经理审批
+        Map<String, Object> variables = processEngine.getTaskService().getVariables(taskId);
+        System.out.println(variables.toString());
+    }
+
+    /**
+     * 设置任务节点变量
+     */
+    @Test
+    public void setTaskVariable(){
+        // 任务ID
+        String taskId = "70003";
+        TaskService taskService = processEngine.getTaskService();
+
+        // 1.设置任务变量
+        taskService.setVariableLocal(taskId,"test","任务节点变量");
+    }
+
+    public void getTaskVariable(){
+
     }
 }
